@@ -1,14 +1,18 @@
 import express, { Request, Response } from "express";
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
+import bodyParser from "body-parser";
+import cors from "cors";
+import morgan from "morgan";
 
-import healthRouter from './routers/health';
+import healthRouter from "./routers/health";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(morgan('combined'))
+app.use(bodyParser.json({ limit: "20mb" }));
+app.use(cors());
+app.use(morgan("combined"));
+
 app.use(healthRouter());
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));

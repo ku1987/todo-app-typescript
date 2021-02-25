@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 
 const BASE_PATH = "health";
 
-export default () => {
+export default (): Router => {
   const router = Router();
 
   router.get(`/${BASE_PATH}`, async (req: Request, res: Response) => {
@@ -19,10 +19,11 @@ export default () => {
         status: "success",
         data: health,
       });
+    } else {
+      res.status(400).json({
+        status: "fail",
+      });
     }
-    res.status(400).json({
-      status: "fail",
-    });
   });
 
   return router;

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 
-const BASE_PATH = '/health';
+const BASE_PATH = '/users';
 
 export default (): Router => {
   const router = Router();
@@ -12,7 +12,7 @@ export default (): Router => {
     });
   });
 
-  router.post(`${BASE_PATH}`, async (req: Request, res: Response) => {
+  router.post(`/${BASE_PATH}`, async (req: Request, res: Response) => {
     console.log(req.body);
 
     const { health = null } = req.body;

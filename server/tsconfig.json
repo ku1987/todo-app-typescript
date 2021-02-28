@@ -19,7 +19,8 @@
       "outDir": "dist/",
       "lib": [
           "ES2019.Array"
-      ]
+      ],
+      "types": ["node"]
   },
   "include": [
       "./src/**/*"

@@ -13,6 +13,8 @@ export default (): Router => {
   });
 
   router.post(`/${BASE_PATH}`, async (req: Request, res: Response) => {
+    console.log(req.body);
+
     const { health = null } = req.body;
     if (health === 'good') {
       res.status(200).json({

@@ -1,12 +1,13 @@
 import knex from 'knex';
+import config from 'config';
 
 const connection = knex({
   client: 'postgres',
   connection: {
-    host: '127.0.0.1',
-    user: 'todoapp',
-    password: 'todoapp',
-    database: 'todoapp',
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
   },
 });
 

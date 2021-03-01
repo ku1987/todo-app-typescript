@@ -1,3 +1,8 @@
+import config from './config';
+
+const CLIENT = 'postgres';
+const DIRECTORY = './src/db/migrations';
+
 interface KnexFile {
   development: {
     client: string;
@@ -47,46 +52,46 @@ interface KnexFile {
 
 const knexfile: KnexFile = {
   development: {
-    client: 'postgres',
+    client: CLIENT,
     connection: {
-      database: 'todoapp',
-      user: 'todoapp',
-      password: 'todoapp',
+      database: config.database,
+      user: config.user,
+      password: config.password,
     },
     migrations: {
-      directory: './src/db/migrations',
+      directory: DIRECTORY,
       tableName: 'knex_migrations',
     },
   },
   staging: {
-    client: 'postgres',
+    client: CLIENT,
     connection: {
-      database: 'todoapp',
-      user: 'todoapp',
-      password: 'todoapp',
+      database: config.database,
+      user: config.user,
+      password: config.password,
     },
     pool: {
       min: 2,
       max: 10,
     },
     migrations: {
-      directory: './src/db/migrations',
+      directory: DIRECTORY,
       tableName: 'knex_migrations',
     },
   },
   production: {
-    client: 'postgres',
+    client: CLIENT,
     connection: {
-      database: 'todoapp',
-      user: 'todoapp',
-      password: 'todoapp',
+      database: config.database,
+      user: config.user,
+      password: config.password,
     },
     pool: {
       min: 2,
       max: 10,
     },
     migrations: {
-      directory: './src/db/migrations',
+      directory: DIRECTORY,
       tableName: 'knex_migrations',
     },
   },

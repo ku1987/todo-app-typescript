@@ -20,7 +20,7 @@
       "lib": [
           "ES2019.Array"
       ],
-      "types": ["node"]
+      "types": ["jest", "node"]
   },
   "include": [
       "./src/**/*"

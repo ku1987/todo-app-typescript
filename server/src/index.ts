@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 import healthRouter from './routers/health';
 import usersRouter from './routers/users';
+import keysRouter from './routers/keys';
 
 const app = express();
 
@@ -13,7 +14,16 @@ app.use(morgan('combined'));
 
 app.use(healthRouter());
 app.use(usersRouter());
+app.use(keysRouter());
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
+
+process
+  .on('unhandledRejection', (reason) => {
+    console.error(reason, 'Unhandled rejection occurred.');
+  })
+  .on('uncaughtException', (reason) => {
+    console.error(reason, 'Unhandled exception occurred.');
+  });

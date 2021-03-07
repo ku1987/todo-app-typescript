@@ -21,3 +21,7 @@ export const handleParameterMissing = (res: Response, message: string): void => 
 export const handleNotFound = (res: Response, message: string): void => {
   handleError(res, 404, `${message}: not found.`);
 };
+
+export const handleForbidden = (res: Response): void => {
+  handleError(res, 403, 'Forbidden.');
+};

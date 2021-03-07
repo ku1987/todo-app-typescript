@@ -1,6 +1,6 @@
 import knex from '../connection';
 
-interface User {
+export interface User {
   userId: string;
   created_at: number;
 }

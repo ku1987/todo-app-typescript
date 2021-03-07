@@ -9,12 +9,23 @@ export default (): Router => {
 
   router.get(`${BASE_PATH}/:userId`, async (req: Request, res: Response) => {
     const { userId } = req.params;
-    await getUserController(res, userId);
+    const user = await getUserController(res, userId);
+    res.status(200).json({
+      status: 'success',
+      data: user,
+    });
   });
 
   router.post(`${BASE_PATH}/:userId`, async (req: Request, res: Response) => {
     const { userId } = req.params;
-    await createUserController(res, userId);
+    const result = await createUserController(res, userId);
+    if (!result) {
+      return;
+    }
+    res.status(200).json({
+      status: 'success',
+      data: result,
+    });
   });
 
   return router;

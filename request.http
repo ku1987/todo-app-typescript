@@ -1,0 +1,21 @@
+GET http://localhost:3000/users/test
+
+###
+
+POST http://localhost:3000/users/test5
+Content-Type: application/json
+
+###
+
+POST http://localhost:3000/keys/test
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/keys/key/33e562ca7ff9fde8fd1fe8ab08cd16cbc9de9b5c7caa29cbeb11f5655c1e5469
+user-id: test
+
+###
+
+GET http://localhost:3000/keys/user/test
+user-id: test

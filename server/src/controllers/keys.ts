@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { createHmac } from 'crypto';
 import { handleInternalError, handleNotFound, handleForbidden, handleError } from 'src/routers/common';
 import { Key, getKeyByAccessKey, getKeyByUserId, addKey } from '../db/models/keys';
+import { getUserController } from 'src/controllers/get-users';
 
 const HMAC_ALGORITHM = 'sha256';
 const ENCODING = 'hex';
@@ -58,6 +59,10 @@ export const createKey = async (res: Response, userId: string): Promise<Key> => 
     secretKey,
   };
   try {
+    const user = await getUserController(res, userId);
+    if (!user) {
+      return null;
+    }
     const existingKey = await getKeyByUserId(userId);
     if (existingKey) {
       handleError(res, 400, 'This user already has an access key.');

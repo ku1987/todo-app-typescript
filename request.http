@@ -7,7 +7,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/keys/test
+POST http://localhost:3000/keys/test6
 Content-Type: application/json
 
 ###
@@ -17,5 +17,5 @@ user-id: test
 
 ###
 
-GET http://localhost:3000/keys/user/test
+GET http://localhost:3000/keys/user/testrrr
 user-id: test

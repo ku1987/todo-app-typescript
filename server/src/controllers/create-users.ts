@@ -1,10 +1,14 @@
 import { Response } from 'express';
-import { addUser } from '../db/models/users';
-import { handleInternalError, handleParameterMissing } from '../routers/common';
+import { addUser, getSingleUser } from '../db/models/users';
+import { handleError, handleForbidden, handleInternalError, handleParameterMissing } from '../routers/common';
 
 export const createUserController = async (res: Response, userId: string) => {
   if (!userId) {
     handleParameterMissing(res, 'User ID');
+    return null;
+  }
+  if (await getSingleUser({ userId })) {
+    handleError(res, 400, 'User ID already exists.');
     return null;
   }
   try {

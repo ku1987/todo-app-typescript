@@ -1,10 +1,12 @@
 import { Response } from 'express';
 import { addUser, getSingleUser } from '../db/models/users';
-import { handleError, handleForbidden, handleInternalError, handleParameterMissing } from '../routers/common';
+import { handleError, handleInternalError, handleParameterMissing, handleInvalidParameter } from '../routers/common';
+import { userValidator } from '../validators/users';
 
 export const createUserController = async (res: Response, userId: string) => {
-  if (!userId) {
-    handleParameterMissing(res, 'User ID');
+  const isValid = await userValidator({ userId });
+  if (!isValid) {
+    handleInvalidParameter(res);
     return null;
   }
   if (await getSingleUser({ userId })) {

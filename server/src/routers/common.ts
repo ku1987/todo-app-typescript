@@ -18,6 +18,10 @@ export const handleParameterMissing = (res: Response, message: string): void => 
   handleError(res, 400, `${message} is required.`);
 };
 
+export const handleInvalidParameter = (res: Response): void => {
+  handleError(res, 400, `Parameter is invalid.`);
+};
+
 export const handleNotFound = (res: Response, message: string): void => {
   handleError(res, 404, `${message}: not found.`);
 };

@@ -1,8 +1,9 @@
 import { Response } from 'express';
 import { createHmac } from 'crypto';
-import { handleInternalError, handleNotFound, handleForbidden, handleError } from 'src/routers/common';
-import { Key, getKeyByAccessKey, getKeyByUserId, addKey } from '../db/models/keys';
+import { handleInternalError, handleError, handleInvalidParameter } from 'src/routers/common';
+import { Key, getKeyByUserId, addKey } from '../db/models/keys';
 import { getUserController } from 'src/controllers/get-users';
+import { keyValidator } from '../validators/keys';
 
 const HMAC_ALGORITHM = 'sha256';
 const ENCODING = 'hex';
@@ -16,40 +17,6 @@ const generateKey = (userId: string, secret: string): string => {
   return hmac.digest(ENCODING);
 };
 
-export const getKey = async (res: Response, userId: string, accessKey: string): Promise<Key> => {
-  try {
-    const key = await getKeyByAccessKey(accessKey);
-    if (!key) {
-      handleNotFound(res, 'Access Key');
-      return null;
-    }
-    if (userId !== key.userId) {
-      handleForbidden(res);
-    }
-    return key;
-  } catch (error) {
-    handleInternalError(res, error.message);
-    return null;
-  }
-};
-
-export const getKeyByUser = async (res: Response, userId: string, accessUser: string): Promise<Key> => {
-  try {
-    const key = await getKeyByUserId(userId);
-    if (!key) {
-      handleNotFound(res, 'Access Key');
-      return null;
-    }
-    if (userId !== accessUser) {
-      handleForbidden(res);
-    }
-    return key;
-  } catch (error) {
-    handleInternalError(res, error.message);
-    return null;
-  }
-};
-
 export const createKey = async (res: Response, userId: string): Promise<Key> => {
   const accessKey = generateKey(userId, CRYPTO_ACCESS_KEY);
   const secretKey = generateKey(userId, CRYPTO_SECRET_KEY);
@@ -58,6 +25,11 @@ export const createKey = async (res: Response, userId: string): Promise<Key> => 
     accessKey,
     secretKey,
   };
+  const isValid = await keyValidator(newKey);
+  if (!isValid) {
+    handleInvalidParameter(res);
+    return null;
+  }
   try {
     const user = await getUserController(res, userId);
     if (!user) {

@@ -7,7 +7,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/keys/test6
+POST http://localhost:3000/keys/test5
 Content-Type: application/json
 
 ###

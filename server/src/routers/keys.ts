@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
-import { getKey, createKey, getKeyByUser } from '../controllers/keys';
+import { createKey } from '../controllers/create-key';
+import { getKey, getKeyByUser } from '../controllers/get-key';
 import { handleInternalError, handleParameterMissing } from './common';
 
 const BASE_PATH = '/keys';

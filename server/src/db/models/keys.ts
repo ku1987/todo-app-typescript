@@ -7,8 +7,6 @@ export interface Key {
   created_at?: number;
 }
 
-const fields = ['accessKey, secretKey, userId'];
-
 export const getKeyByAccessKey = async (accessKey: string): Promise<Key> => {
   try {
     const result = await knex('keys').where({

@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { handleInternalError, handleNotFound, handleForbidden } from 'src/routers/common';
-import { Key, getKeyByAccessKey, getKeyByUserId, addKey } from '../db/models/keys';
+import { Key, getKeyByAccessKey, getKeyByUserId } from '../db/models/keys';
 
 export const getKey = async (res: Response, userId: string, accessKey: string): Promise<Key> => {
   try {

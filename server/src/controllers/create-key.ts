@@ -1,8 +1,8 @@
 import { Response } from 'express';
 import { createHmac } from 'crypto';
 import { handleInternalError, handleError, handleInvalidParameter } from 'src/routers/common';
-import { Key, getKeyByUserId, addKey } from '../db/models/keys';
 import { getUserController } from 'src/controllers/get-users';
+import { Key, getKeyByUserId, addKey } from '../db/models/keys';
 import { keyValidator } from '../validators/keys';
 
 const HMAC_ALGORITHM = 'sha256';

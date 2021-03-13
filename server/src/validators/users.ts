@@ -2,10 +2,12 @@ import * as yup from 'yup';
 
 const schema = yup.object().shape({
   userId: yup.string().required(),
+  password: yup.string().required(),
 });
 
 interface User {
   userId: string;
+  password: string;
 }
 
 export const userValidator = async (user: User) => {

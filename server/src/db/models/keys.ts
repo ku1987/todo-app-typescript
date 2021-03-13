@@ -7,7 +7,7 @@ export interface Key {
   created_at?: number;
 }
 
-export const getKeyByAccessKey = async (accessKey: string): Promise<Key> => {
+export const getKeyByAccessKey = async (accessKey: string): Promise<Key | null> => {
   try {
     const result = await knex('keys').where({
       accessKey,
@@ -22,7 +22,7 @@ export const getKeyByAccessKey = async (accessKey: string): Promise<Key> => {
   }
 };
 
-export const getKeyByUserId = async (userId: string): Promise<Key> => {
+export const getKeyByUserId = async (userId: string): Promise<Key | null> => {
   try {
     const result = await knex('keys').where({
       userId,

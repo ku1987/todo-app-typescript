@@ -18,7 +18,8 @@ export default (): Router => {
 
   router.post(`${BASE_PATH}/:userId`, async (req: Request, res: Response) => {
     const { userId } = req.params;
-    const result = await createUserController(res, userId);
+    const { password } = req.body;
+    const result = await createUserController(res, userId, password);
     if (!result) {
       return;
     }

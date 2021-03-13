@@ -17,7 +17,7 @@ const generateKey = (userId: string, secret: string): string => {
   return hmac.digest(ENCODING);
 };
 
-export const createKey = async (res: Response, userId: string): Promise<Key> => {
+export const createKey = async (res: Response, userId: string): Promise<Key | null> => {
   const accessKey = generateKey(userId, CRYPTO_ACCESS_KEY);
   const secretKey = generateKey(userId, CRYPTO_SECRET_KEY);
   const newKey = {

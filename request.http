@@ -2,8 +2,12 @@ GET http://localhost:3000/users/test
 
 ###
 
-POST http://localhost:3000/users/test5
+POST http://localhost:3000/users/test6
 Content-Type: application/json
+
+{
+  "password": "test6"
+}
 
 ###
 

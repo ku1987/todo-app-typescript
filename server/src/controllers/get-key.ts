@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { handleInternalError, handleNotFound, handleForbidden } from 'src/routers/common';
 import { Key, getKeyByAccessKey, getKeyByUserId } from '../db/models/keys';
 
-export const getKey = async (res: Response, userId: string, accessKey: string): Promise<Key> => {
+export const getKey = async (res: Response, userId: string, accessKey: string): Promise<Key | null> => {
   try {
     const key = await getKeyByAccessKey(accessKey);
     if (!key) {
@@ -19,7 +19,7 @@ export const getKey = async (res: Response, userId: string, accessKey: string): 
   }
 };
 
-export const getKeyByUser = async (res: Response, userId: string, accessUser: string): Promise<Key> => {
+export const getKeyByUser = async (res: Response, userId: string, accessUser: string): Promise<Key | null> => {
   try {
     const key = await getKeyByUserId(userId);
     if (!key) {

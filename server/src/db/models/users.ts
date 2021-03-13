@@ -2,17 +2,18 @@ import knex from '../connection';
 
 export interface User {
   userId: string;
+  password: string;
   created_at: number;
 }
 
-export const getSingleUser = async (filter: any): Promise<User[]> => {
+export const getSingleUser = async (filter: any): Promise<User[] | null> => {
   try {
     const result = await knex('users').where({
       ...filter,
       deleted_at: null,
     });
     if (result.length !== 1) {
-      return [];
+      return null;
     }
     return result[0];
   } catch (error) {
@@ -20,15 +21,12 @@ export const getSingleUser = async (filter: any): Promise<User[]> => {
   }
 };
 
-export const addUser = async (userId: string): Promise<User> => {
+export const addUser = async (userId: string, password: string): Promise<User> => {
   const result = {
     userId,
+    password,
     created_at: Math.floor(Date.now() / 1000),
   };
-  try {
-    await knex('users').insert(result);
-  } catch (error) {
-    throw new Error(error.message);
-  }
+  await knex('users').insert(result);
   return result;
 };

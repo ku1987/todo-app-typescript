@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import healthRouter from './routers/health';
 import usersRouter from './routers/users';
 import keysRouter from './routers/keys';
+import loginRouter from './routers/login';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(morgan('combined'));
 app.use(healthRouter());
 app.use(usersRouter());
 app.use(keysRouter());
+app.use(loginRouter());
 
 const PORT = process.env.PORT || 3000;
 

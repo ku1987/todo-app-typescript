@@ -6,7 +6,7 @@ export interface User {
   created_at: number;
 }
 
-export const getSingleUser = async (filter: any): Promise<User[] | null> => {
+export const getSingleUser = async (filter: any): Promise<User | null> => {
   try {
     const result = await knex('users').where({
       ...filter,

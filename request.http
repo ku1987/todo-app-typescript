@@ -23,3 +23,19 @@ user-id: test
 
 GET http://localhost:3000/keys/user/testrrr
 user-id: test
+
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "userId": "test6",
+  "password": "test6"
+}
+
+###
+
+GET http://localhost:3000/login/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdTE5ODciLCJ1c2VySWQiOiJ0ZXN0NiIsImlhdCI6MTYxNTYwMDAzMywiZXhwIjoxNjE1NjAwMDQ4fQ.-iVfaJMn7hLmfYt8pqsllZnbr2U-VvXHQ0lGSjlPFDg

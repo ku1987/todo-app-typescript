@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 export const handleError = (res: Response, code: number, message: string): void => {
   res.status(code).json({
@@ -19,7 +19,7 @@ export const handleParameterMissing = (res: Response, message: string): void => 
 };
 
 export const handleInvalidParameter = (res: Response): void => {
-  handleError(res, 400, `Parameter is invalid.`);
+  handleError(res, 400, 'Parameter is invalid.');
 };
 
 export const handleNotFound = (res: Response, message: string): void => {

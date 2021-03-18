@@ -25,8 +25,8 @@ export const authController = async (res: Response, auth: string) => {
   }
   const jwtValue = bearer[1];
   try {
-    const decodedJWT = jwt.decode(jwtValue);
-    const user = await getSingleUser({ userId: (decodedJWT as DecodedJWT).userId });
+    const decodedJWT = jwt.decode(jwtValue) as DecodedJWT;
+    const user = await getSingleUser({ userId: decodedJWT.userId });
     if (!user) {
       handleNotFound(res, 'User');
       return null;

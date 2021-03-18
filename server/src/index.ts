@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import helmet from 'helmet';
 
 import healthRouter from './routers/health';
 import usersRouter from './routers/users';
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json({ limit: '20mb' }));
 app.use(cors());
 app.use(morgan('combined'));
+app.use(helmet());
 
 app.use(healthRouter());
 app.use(usersRouter());

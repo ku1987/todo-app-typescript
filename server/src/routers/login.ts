@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { loginController } from '../controllers/login';
 import { authController } from '../controllers/auth';
-import { handleParameterMissing } from './common';
+import { handleParameterMissing, API_BASE_PATH } from './common';
 
-const BASE_PATH = '/login';
+const BASE_PATH = `${API_BASE_PATH}/login`;
 
 export default (): Router => {
   const router = Router();

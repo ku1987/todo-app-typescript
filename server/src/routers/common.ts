@@ -1,5 +1,7 @@
 import { Response } from 'express';
 
+export const API_BASE_PATH = '/api/v1';
+
 export const handleError = (res: Response, code: number, message: string): void => {
   res.status(code).json({
     status: 'fail',

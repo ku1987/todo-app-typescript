@@ -1,8 +1,12 @@
-GET http://localhost:3000/users/test
+GET http://localhost:3000/health
 
 ###
 
-POST http://localhost:3000/users/test6
+GET http://localhost:3000/api/v1/users/test
+
+###
+
+POST http://localhost:3000/api/v1/users/test6
 Content-Type: application/json
 
 {
@@ -11,23 +15,23 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/keys/test5
+POST http://localhost:3000/api/v1/keys/test5
 Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/keys/key/33e562ca7ff9fde8fd1fe8ab08cd16cbc9de9b5c7caa29cbeb11f5655c1e5469
+GET http://localhost:3000/api/v1/keys/key/33e562ca7ff9fde8fd1fe8ab08cd16cbc9de9b5c7caa29cbeb11f5655c1e5469
 user-id: test
 
 ###
 
-GET http://localhost:3000/keys/user/testrrr
+GET http://localhost:3000/api/v1/keys/user/testrrr
 user-id: test
 
 
 ###
 
-POST http://localhost:3000/login
+POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
@@ -37,5 +41,27 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/login/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdTE5ODciLCJ1c2VySWQiOiJ0ZXN0NiIsImlhdCI6MTYxNTYwMDAzMywiZXhwIjoxNjE1NjAwMDQ4fQ.-iVfaJMn7hLmfYt8pqsllZnbr2U-VvXHQ0lGSjlPFDg
+GET http://localhost:3000/api/v1/login/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdTE5ODciLCJ1c2VySWQiOiJ0ZXN0NiIsImlhdCI6MTYxNjUwMDgwMywiZXhwIjoxNjE2NTAxNzAzfQ.kT98sgTnZkt51Ml7enVYIjFAghhHk4tbyQf-SCrL61k
+
+###
+
+POST http://localhost:3000/api/v1/todo
+Content-Type: application/json
+user-id: test6
+
+{
+  "name": "Test todo2",
+  "description": "Do some great stuff",
+  "priority": 2,
+  "dueDate": 1617106687
+}
+
+
+###
+
+GET http://localhost:3000/api/v1/todo/2
+
+###
+
+GET http://localhost:3000/api/v1/todo/user/test6

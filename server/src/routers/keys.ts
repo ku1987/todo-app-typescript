@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { createKey } from '../controllers/create-key';
 import { getKey, getKeyByUser } from '../controllers/get-key';
-import { handleInternalError, handleParameterMissing } from './common';
+import { handleInternalError, handleParameterMissing, API_BASE_PATH } from './common';
 
-const BASE_PATH = '/keys';
+const BASE_PATH = `${API_BASE_PATH}/keys`;
 
 export default (): Router => {
   const router = Router();

@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { getUserController } from '../controllers/get-users';
 import { createUserController } from '../controllers/create-users';
+import { API_BASE_PATH } from './common';
 
-const BASE_PATH = '/users';
+const BASE_PATH = `${API_BASE_PATH}/users`;
 
 export default (): Router => {
   const router = Router();

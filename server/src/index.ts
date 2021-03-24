@@ -7,6 +7,7 @@ import healthRouter from './routers/health';
 import usersRouter from './routers/users';
 import keysRouter from './routers/keys';
 import loginRouter from './routers/login';
+import todoRouter from './routers/todos';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(healthRouter());
 app.use(usersRouter());
 app.use(keysRouter());
 app.use(loginRouter());
+app.use(todoRouter());
 
 const PORT = process.env.PORT || 3000;
 

@@ -3,7 +3,7 @@ GET http://localhost:3002/health
 ###
 
 GET http://localhost:3002/api/v1/users/test
-
+Authorization: 
 ###
 
 POST http://localhost:3002/api/v1/users/test6
@@ -42,7 +42,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3002/api/v1/login/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdTE5ODciLCJ1c2VySWQiOiJ0ZXN0NiIsImlhdCI6MTYxNjUwMDgwMywiZXhwIjoxNjE2NTAxNzAzfQ.kT98sgTnZkt51Ml7enVYIjFAghhHk4tbyQf-SCrL61k
+Authorization: 
 
 ###
 

@@ -1,14 +1,13 @@
 import knex from 'knex';
 import config from '../../config';
 
-const connection = knex({
+export default knex({
   client: 'postgres',
   connection: {
     host: config.host,
+    port: config.port,
     user: config.user,
     password: config.password,
     database: config.database,
   },
 });
-
-export default connection;

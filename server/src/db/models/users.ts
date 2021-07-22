@@ -7,18 +7,14 @@ export interface User {
 }
 
 export const getSingleUser = async (filter: any): Promise<User | null> => {
-  try {
-    const result = await knex('users').where({
-      ...filter,
-      deleted_at: null,
-    });
-    if (result.length !== 1) {
-      return null;
-    }
-    return result[0];
-  } catch (error) {
-    throw new Error(error.message);
+  const result = await knex('users').where({
+    ...filter,
+    deleted_at: null,
+  });
+  if (result.length !== 1) {
+    return null;
   }
+  return result[0];
 };
 
 export const addUser = async (userId: string, password: string): Promise<User> => {

@@ -1,7 +1,7 @@
-import { Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { getSingleUser } from 'src/db/models/users';
-import { handleInternalError, handleInvalidParameter, handleNotFound } from '../routers/common';
+import { handleForbidden, handleInvalidParameter, handleNotFound } from '../routers/common';
 import { DEFAULT_TOKEN_ISSUER } from '../biz/const';
 
 const AUTHORIZATION_VALUE_REGEX = /^Bearer (.*)/;
@@ -13,15 +13,16 @@ interface DecodedJWT {
   exp: number;
 }
 
-export const authController = async (res: Response, auth: string) => {
-  if (!AUTHORIZATION_VALUE_REGEX.test(auth)) {
+export default async (req: Request, res: Response, next: NextFunction) => {
+  const auth = req.headers.authorization;
+  if (!auth || !AUTHORIZATION_VALUE_REGEX.test(auth)) {
     handleInvalidParameter(res);
-    return null;
+    return;
   }
   const bearer = auth.match(AUTHORIZATION_VALUE_REGEX);
   if (!bearer) {
     handleInvalidParameter(res);
-    return null;
+    return;
   }
   const jwtValue = bearer[1];
   try {
@@ -29,15 +30,15 @@ export const authController = async (res: Response, auth: string) => {
     const user = await getSingleUser({ userId: decodedJWT.userId });
     if (!user) {
       handleNotFound(res, 'User');
-      return null;
+      return;
     }
-    const result = jwt.verify(jwtValue, user.password, {
+    jwt.verify(jwtValue, user.password, {
       issuer: DEFAULT_TOKEN_ISSUER,
     });
-    return result;
+    next();
+    return;
   } catch (error) {
     console.log(error.message);
-    handleInternalError(res, error.message);
-    return null;
+    handleForbidden(res);
   }
 };

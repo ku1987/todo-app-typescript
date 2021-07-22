@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "knex migrate:latest ts-node --files src/index.ts",
+    "start": "knex migrate:latest ts-node src/index.ts",
     "dev": "nodemon",
     "test": "jest --watch --forceExit"
   },

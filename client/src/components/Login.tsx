@@ -3,9 +3,11 @@ import './App.css';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import { authenticate } from 'api/login';
+import { TOKEN_TYPES } from 'biz/const';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -28,9 +30,14 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const handleSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
-      console.log(email, password);
+      try {
+        const result = await authenticate(email, password);
+        localStorage.setItem(TOKEN_TYPES.ACCESS_TOKEN, result);
+      } catch (error) {
+        console.error(error);
+      }
     },
     [email, password]
   );

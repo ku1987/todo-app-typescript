@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import './index.css';
-import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+
+const App = React.lazy(() => import('./components/App'));
+const Login = React.lazy(() => import('./components/Login'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={<CircularProgress />}>
+      <BrowserRouter basename="/">
+        <Switch>
+          <Route path="/" exact>
+            <App />
+          </Route>
+          <Route path="/login" exact>
+            <Login />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

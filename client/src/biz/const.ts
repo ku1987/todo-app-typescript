@@ -12,5 +12,5 @@ export const ERROR_CODES = {
 };
 
 export const ERROR_MESSAGES = {
-  LOGIN_FAILED: 'ID or Password is incorrect.',
+  LOGIN_FAILED: 'Email or Password is incorrect.',
 };

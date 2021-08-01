@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { authenticate } from 'api/login';
 import { APP_TITLE, ERROR_CODES, ERROR_MESSAGES, TOKEN_TYPES } from 'biz/const';
 import { redirectToApp } from 'utils/login-utils';
+import { signUp } from 'api/sign-up';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function Login() {
+function SignUp() {
   const PAGE_TITLE = 'Login';
   useEffect(() => {
     document.title = `${PAGE_TITLE} | ${APP_TITLE}`;
@@ -50,24 +51,21 @@ function Login() {
       e.preventDefault();
       setErrorMessage('');
       try {
-        const result = await authenticate(email, password);
-        localStorage.setItem(TOKEN_TYPES.ACCESS_TOKEN, result);
-        redirectToApp();
+        await signUp(email, password);
+        alert('Success!');
       } catch (error) {
         console.error(error);
-        if (error.response.status === ERROR_CODES.UNAUTHORIZED || error.response.status === ERROR_CODES.NOT_FOUND) {
-          setErrorMessage(ERROR_MESSAGES.LOGIN_FAILED);
-        }
+        setErrorMessage(error.message);
       }
     },
     [email, password]
   );
 
   const history = useHistory();
-  const handleSignUp = useCallback(
+  const handleLogin = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      history.push('/sign-up');
+      history.push('/login');
     },
     [history]
   );
@@ -111,14 +109,14 @@ function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
             >
-              Sign In
+              Sign Up
             </Button>
           </form>
-          <Button fullWidth variant="contained" color="default" className={classes.submit} onClick={handleSignUp}>
-            Sign Up
+          <Button fullWidth variant="contained" color="default" className={classes.submit} onClick={handleLogin}>
+            Back to Login
           </Button>
         </div>
       </Container>
@@ -126,4 +124,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;

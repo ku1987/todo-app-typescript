@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+
 import { getUserController } from '../controllers/get-users';
 import { createUserController } from '../controllers/create-users';
 import { API_BASE_PATH } from './common';
@@ -19,10 +20,10 @@ export default (): Router => {
     });
   });
 
-  router.post(`${BASE_PATH}/:userId`, async (req: Request, res: Response) => {
-    const { userId } = req.params;
-    const { password } = req.body;
-    const result = await createUserController(res, userId, password);
+  router.post(`${BASE_PATH}`, async (req: Request, res: Response) => {
+    const { userId, password } = req.body;
+    const data = { userId, password };
+    const result = await createUserController(res, data);
     if (!result) {
       return;
     }

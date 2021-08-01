@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import SignUp from 'components/SignUp';
 
 const App = React.lazy(() => import('./components/App'));
 const Login = React.lazy(() => import('./components/Login'));
@@ -19,6 +20,9 @@ ReactDOM.render(
           </Route>
           <Route path="/login" exact>
             <Login />
+          </Route>
+          <Route path="/sign-up" exact>
+            <SignUp />
           </Route>
         </Switch>
       </BrowserRouter>

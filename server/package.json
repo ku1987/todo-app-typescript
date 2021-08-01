@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "knex migrate:latest ts-node src/index.ts",
+    "start": "knex migrate:latest --knexfile knexfile.ts | ts-node --files -r tsconfig-paths/register src/index.ts",
     "dev": "nodemon",
     "test": "jest --watch --forceExit"
   },
@@ -37,6 +37,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.31",
-    "@types/yup": "^0.29.11"
+    "@types/yup": "^0.29.11",
+    "tsconfig-paths": "^3.10.1"
   }
 }

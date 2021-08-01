@@ -8,8 +8,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('description').notNullable();
     table.integer('priority').notNullable();
     table.integer('dueDate').notNullable();
-    table.integer('created_at').notNullable();
-    table.integer('updated_at');
+    table.timestamps(true, true);
     table.integer('deleted_at');
   });
 }

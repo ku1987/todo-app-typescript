@@ -8,6 +8,7 @@ interface KnexFile {
     client: string;
     connection: {
       database: string;
+      host: string;
       port: number;
       user: string;
       password: string;
@@ -23,6 +24,7 @@ interface KnexFile {
       database: string;
       port: number;
       user: string;
+      host: string;
       password: string;
     };
     pool: {
@@ -38,6 +40,7 @@ interface KnexFile {
     client: string;
     connection: {
       database: string;
+      host: string;
       port: number;
       user: string;
       password: string;
@@ -59,6 +62,7 @@ const knexfile: KnexFile = {
     connection: {
       database: config.database,
       port: config.port,
+      host: config.host,
       user: config.user,
       password: config.password,
     },
@@ -72,6 +76,7 @@ const knexfile: KnexFile = {
     connection: {
       database: config.database,
       port: config.port,
+      host: config.host,
       user: config.user,
       password: config.password,
     },
@@ -88,6 +93,7 @@ const knexfile: KnexFile = {
     client: CLIENT,
     connection: {
       database: config.database,
+      host: config.host,
       port: config.port,
       user: config.user,
       password: config.password,

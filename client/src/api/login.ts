@@ -9,7 +9,6 @@ export const authenticate = async (email: string, password: string) => {
     password,
   };
   const result = await postData(BASE_PATH, data);
-
   if (result.status !== 'success') {
     throw new Error('Failed to login.');
   }

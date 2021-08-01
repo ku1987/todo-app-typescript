@@ -1,4 +1,5 @@
 node_modules
 request.http
 server/postgres/
+server/postgresql_data/
 .env

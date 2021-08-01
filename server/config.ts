@@ -11,8 +11,8 @@ interface Config {
 }
 
 const defaultConfig: Config = {
-  host: '127.0.0.1',
-  port: parseInt(process.env.PORT as string, 10) || 5433,
+  host: process.env.DB_HOST || 'db',
+  port: parseInt(process.env.PORT as string, 10) || 5432,
   user: process.env.DB_USER || 'todoapp',
   password: process.env.DB_PASSWORD || 'todoapp',
   database: process.env.DB_NAME || 'todoapp',
@@ -20,7 +20,7 @@ const defaultConfig: Config = {
 
 const stagingConfig: Config = {
   host: '',
-  port: 5433,
+  port: 5432,
   user: '',
   password: '',
   database: '',
@@ -28,7 +28,7 @@ const stagingConfig: Config = {
 
 const productionConfig: Config = {
   host: '',
-  port: 5433,
+  port: 5432,
   user: '',
   password: '',
   database: '',
@@ -36,7 +36,7 @@ const productionConfig: Config = {
 
 const config: Config = {
   host: '',
-  port: 5433,
+  port: 5432,
   user: '',
   password: '',
   database: '',

@@ -6,8 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('accessKey', 255).unique().notNullable();
     table.string('secretKey', 255).unique().notNullable();
     table.string('userId', 255).notNullable().references('users.userId');
-    table.integer('created_at').notNullable();
-    table.integer('updated_at');
+    table.timestamps(true, true);
     table.integer('deleted_at');
   });
 }

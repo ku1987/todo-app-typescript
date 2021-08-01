@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:12.7
+    container_name: db
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - ./server/postgres/init:/docker-entrypoint-initdb.d
+      - ./server/postgresql_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    hostname: postgres
+    restart: always
+    user: root
+
+  node:
+    container_name: node
+    build: ./server/
+    ports:
+      - 3002:3002
+    depends_on: 
+      - db
+  
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./client/build:/var/www
+      - ./client/nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - node

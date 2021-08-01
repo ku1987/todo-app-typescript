@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { getSingleUser } from 'src/db/models/users';
-import { handleForbidden, handleInvalidParameter, handleNotFound } from '../routers/common';
+import { handleForbidden } from '../routers/common';
 import { DEFAULT_TOKEN_ISSUER } from '../biz/const';
 
 const AUTHORIZATION_VALUE_REGEX = /^Bearer (.*)/;
@@ -16,12 +16,12 @@ interface DecodedJWT {
 export default async (req: Request, res: Response, next: NextFunction) => {
   const auth = req.headers.authorization;
   if (!auth || !AUTHORIZATION_VALUE_REGEX.test(auth)) {
-    handleInvalidParameter(res);
+    handleForbidden(res);
     return;
   }
   const bearer = auth.match(AUTHORIZATION_VALUE_REGEX);
   if (!bearer) {
-    handleInvalidParameter(res);
+    handleForbidden(res);
     return;
   }
   const jwtValue = bearer[1];
@@ -29,7 +29,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     const decodedJWT = jwt.decode(jwtValue) as DecodedJWT;
     const user = await getSingleUser({ userId: decodedJWT.userId });
     if (!user) {
-      handleNotFound(res, 'User');
+      handleForbidden(res);
       return;
     }
     jwt.verify(jwtValue, user.password, {

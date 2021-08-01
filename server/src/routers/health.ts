@@ -1,11 +1,12 @@
 import { Router, Request, Response } from 'express';
+import authMiddleware from '../middlewares/auth';
 
 const BASE_PATH = '/health';
 
 export default (): Router => {
   const router = Router();
 
-  router.get(`${BASE_PATH}`, async (req: Request, res: Response) => {
+  router.get(`${BASE_PATH}`, authMiddleware, async (req: Request, res: Response) => {
     res.status(200).json({
       status: 'success',
       data: 'OK',

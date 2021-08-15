@@ -7,9 +7,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-import { authenticate } from 'api/login';
-import { APP_TITLE, ERROR_CODES, ERROR_MESSAGES, TOKEN_TYPES } from 'biz/const';
-import { redirectToApp } from 'utils/login-utils';
+import { APP_TITLE } from 'biz/const';
 import { signUp } from 'api/sign-up';
 
 const useStyles = makeStyles((theme: Theme) => ({
